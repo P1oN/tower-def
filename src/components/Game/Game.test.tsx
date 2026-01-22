@@ -1,6 +1,16 @@
-import { act } from "react-dom/test-utils";
+import { act } from "react";
 import { createRoot } from "react-dom/client";
 import Game from "./Game";
+
+beforeAll(() => {
+  (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT =
+    true;
+});
+
+afterAll(() => {
+  (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT =
+    false;
+});
 
 const renderGame = () => {
   const container = document.createElement("div");

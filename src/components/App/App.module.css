@@ -1,6 +1,20 @@
 .app {
-  text-align: center;
-  background-color: #282c34;
-  color: white;
-  height: 100vh;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #1b2c4a 0%, #0c121e 45%, #0a0f18 100%);
+  color: #ecf0f7;
+  padding: 32px 20px 48px;
+  display: flex;
+  justify-content: center;
+}
+
+.appInner {
+  width: min(1100px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.main {
+  display: flex;
+  width: 100%;
 }

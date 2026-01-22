@@ -1,9 +1,32 @@
 import React, { Component } from 'react';
-import './Game.css';
+import styles from './Game.module.css';
 
-export default class Game extends Component {
+type Bot = {
+    id: number;
+    name: string;
+    dist: number;
+    movSpeed: number;
+};
 
-    constructor(props) {
+type Message = {
+    id: number;
+    title: string;
+    desc: string;
+};
+
+type State = {
+    tower: {
+        atkDist: number;
+    };
+    bots: Bot[];
+    messages: Message[];
+    plaing: boolean;
+};
+
+export default class Game extends Component<Record<string, never>, State> {
+    baseState: State;
+
+    constructor(props: Record<string, never>) {
         super(props);
         this.state = {
             tower: {
@@ -132,17 +155,17 @@ export default class Game extends Component {
     render() {
         let { messages, bots, plaing } = this.state;
         return (
-            <div className="Game">
-                <div className="gameChars">
+            <div className={styles.game}>
+                <div className={styles.gameChars}>
                     {bots.map(bot => (
-                        <div key={bot.id}>
+                        <div key={bot.id} className={styles.gameChar}>
                             <span>Name: {bot.name}</span>
                             <span>Distance: {bot.dist}</span>
                             <span>Mov. speed: {bot.movSpeed}</span>
                         </div>
                     ))}
                 </div>
-                <div className="gameMessages">
+                <div className={styles.gameMessages}>
                     {messages.map((message) => (
                         <div key={message.id}>
                             <span>{message.title}</span>
@@ -150,8 +173,19 @@ export default class Game extends Component {
                         </div>
                     ))}
                 </div>
-                <button disabled={!plaing} onClick={this.nextStep}>Next step</button>
-                <button onClick={this.resetGame} className="resetButton">Restart</button>
+                <button
+                    disabled={!plaing}
+                    onClick={this.nextStep}
+                    className={styles.gameButton}
+                >
+                    Next step
+                </button>
+                <button
+                    onClick={this.resetGame}
+                    className={`${styles.gameButton} ${styles.resetButton}`}
+                >
+                    Restart
+                </button>
             </div>
         )
     }

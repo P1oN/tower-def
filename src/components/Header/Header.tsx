@@ -1,10 +1,10 @@
 import React from 'react';
-import './Header.css';
+import styles from './Header.module.css';
 
 export default function Header() {
 
     return (
-        <header>
+    <header className={styles.header}>
             <h1>Tower defence</h1>
         </header>
     )

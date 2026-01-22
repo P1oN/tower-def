@@ -69,8 +69,9 @@
 
 .botGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 150px));
     gap: 12px;
+    justify-content: start;
 }
 
 .gameChar {
@@ -190,6 +191,52 @@
     box-shadow: none;
 }
 
+.autoButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(111, 214, 255, 0.5);
+    background: rgba(12, 24, 40, 0.6);
+    color: rgba(236, 240, 247, 0.9);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.autoIndicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(111, 214, 255, 0.35);
+    box-shadow: 0 0 0 0 rgba(111, 214, 255, 0.35);
+}
+
+.autoActive {
+    background: rgba(37, 72, 122, 0.7);
+    box-shadow: 0 12px 24px rgba(76, 141, 255, 0.25);
+}
+
+.autoActive .autoIndicator {
+    background: #6fd6ff;
+    animation: pulse 1.2s ease-in-out infinite;
+}
+
+.autoButton:disabled {
+    cursor: default;
+    color: rgba(236, 240, 247, 0.45);
+    border-color: rgba(111, 214, 255, 0.2);
+    background: rgba(12, 24, 40, 0.3);
+    box-shadow: none;
+}
+
 @media (max-width: 900px) {
     .gameShell {
         grid-template-columns: 1fr;
@@ -225,7 +272,8 @@
     }
 
     .primaryButton,
-    .secondaryButton {
+    .secondaryButton,
+    .autoButton {
         width: 100%;
         justify-content: center;
     }
@@ -236,6 +284,11 @@
 
     .logList {
         height: 220px;
+    }
+
+    .botGrid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        justify-content: stretch;
     }
 }
 
@@ -258,5 +311,20 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(111, 214, 255, 0.6);
+        transform: scale(1);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(111, 214, 255, 0);
+        transform: scale(1.1);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(111, 214, 255, 0);
+        transform: scale(1);
     }
 }
